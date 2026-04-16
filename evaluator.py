@@ -45,7 +45,6 @@ def evaluate_file(input_path):
 
             new_tokens.append(t1)
 
-            # implicit multiplication cases
             if (t1[0] in ("NUM", "RPAREN") and t2[0] in ("NUM", "LPAREN")):
                 new_tokens.append(("OP", "*"))
 
@@ -100,7 +99,6 @@ def evaluate_file(input_path):
             nonlocal pos
             tok_type, tok_val = tokens[pos]
 
-            # unary minus
             if tok_val == "-":
                 pos += 1
                 val, tree = factor()
@@ -148,11 +146,13 @@ def evaluate_file(input_path):
             try:
                 value, tree = parse(tokens)
 
-                token_str = ""
+                # 🔥 CHANGED HERE (string → list)
+                token_parts = []
                 for t in tokens:
                     if t[0] != "END":
-                        token_str += f"[{t[0]}:{t[1]}] "
-                token_str += "[END]"
+                        token_parts.append(f"[{t[0]}:{t[1]}]")
+                token_parts.append("[END]")
+                token_str = " ".join(token_parts)
 
                 if int(value) == value:
                     result = int(value)
