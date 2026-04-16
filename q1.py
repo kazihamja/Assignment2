@@ -1,5 +1,5 @@
 def encrypt(text, s1, s2):
-    result = ""
+    result = []
 
     for ch in text:
         if ch.islower():
@@ -7,19 +7,19 @@ def encrypt(text, s1, s2):
 
             if pos <= 12:
                 new_pos = (pos + (s1 * s2)) % 26
-                result += chr(new_pos + 97) + "#"
+                result.append(chr(new_pos + 97) + "#")
             else:
                 new_pos = (pos - (s1 + s2)) % 26
-                result += chr(new_pos + 97) + "$"
+                result.append(chr(new_pos + 97) + "$")
 
         else:
-            result += ch
+            result.append(ch)
 
-    return result
+    return "".join(result)
 
 
 def decrypt(text, s1, s2):
-    result = ""
+    result = []
     i = 0
 
     while i < len(text):
@@ -34,13 +34,13 @@ def decrypt(text, s1, s2):
             elif mark == "$":
                 pos = (pos + (s1 + s2)) % 26
 
-            result += chr(pos + 97)
+            result.append(chr(pos + 97))
             i += 2
         else:
-            result += ch
+            result.append(ch)
             i += 1
 
-    return result
+    return "".join(result)
 
 
 # MAIN
