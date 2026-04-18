@@ -128,7 +128,7 @@ def evaluate_file(input_path):
     with open(input_path, "r") as f:
         lines = f.readlines()
 
-    out = open("output.txt", "w")
+    with open("output.txt", "w") as out:
 
     for line in lines:
         exp = line.strip()
